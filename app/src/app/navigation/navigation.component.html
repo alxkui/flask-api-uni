@@ -1,0 +1,29 @@
+<nav class="navigation-styles">
+    <ul ngbNav #nav="ngbNav" class="nav">
+        <li ngbNavItem>
+            <a ngbNavLink>Home</a>
+            <ng-template ngbNavContent>
+                <app-home></app-home>
+            </ng-template>
+        </li>
+        <li ngbNavItem>
+            <a ngbNavLink>Book discussion</a>
+            <ng-template ngbNavContent>
+                <app-discussion></app-discussion>
+            </ng-template>
+        </li>
+        <li ngbNavItem>
+            <a ngbNavLink>Top picks</a>
+            <ng-template ngbNavContent>
+                <app-picks></app-picks>
+            </ng-template>
+        </li>
+        <li ngbNavItem>
+            <a ngbNavLink>Top authors</a>
+            <ng-template ngbNavContent>
+                <app-authors></app-authors>
+            </ng-template>
+        </li>
+    </ul>
+</nav>
+<div [ngbNavOutlet]="nav"></div>

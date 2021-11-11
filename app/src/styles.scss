@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    letter-spacing: 0.07rem;
+}
+
+.jumbotron {
+    margin-bottom: 0;
+}
