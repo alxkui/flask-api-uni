@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BooksService } from './services/books.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavigationComponent } from './navigation/navigation.component';
-import { HomeComponent } from './home/home.component';
-import { DiscussionComponent } from './discussion/discussion.component';
-import { PicksComponent } from './picks/picks.component';
-import { AuthorsComponent } from './authors/authors.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { HomeComponent } from './components/home/home.component';
+import { DiscussionComponent } from './components/discussion/discussion.component';
+import { PicksComponent } from './components/picks/picks.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BookComponent } from './book/book.component';
+import { BookComponent } from './components/home/book/book.component';
 import { HttpClientModule } from '@angular/common/http';
-import { WebService } from './web.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { WebService } from './web.service';
     FontAwesomeModule,
     HttpClientModule,
   ],
-  providers: [WebService],
+  providers: [BooksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

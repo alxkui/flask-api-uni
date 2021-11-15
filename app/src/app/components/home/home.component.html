@@ -5,8 +5,3 @@
 <div *ngIf="books" class="books-list">
     <app-book *ngFor="let book of books" [image]="book.image.url" [title]="book.title"></app-book>
 </div>
-<ngb-pagination
-    [pageSize]="10"
-    [page]="1"
-    [collectionSize]="apiData.stored_books"
-    ></ngb-pagination>
