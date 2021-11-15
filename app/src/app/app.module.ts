@@ -9,6 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { DiscussionComponent } from './discussion/discussion.component';
 import { PicksComponent } from './picks/picks.component';
 import { AuthorsComponent } from './authors/authors.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BookComponent } from './book/book.component';
+import { HttpClientModule } from '@angular/common/http';
+import { WebService } from './web.service';
 
 @NgModule({
   declarations: [
@@ -17,14 +21,17 @@ import { AuthorsComponent } from './authors/authors.component';
     HomeComponent,
     DiscussionComponent,
     PicksComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [WebService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

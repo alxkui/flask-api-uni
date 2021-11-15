@@ -2,37 +2,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     flex-wrap: wrap;
-    .book-container {
-        position: relative;
-        transition: .1s all;
-        .text-container {
-            color: white;
-        }
-        &:hover {
-            transform: scale(1.25);
-            transform-origin: center;
-            z-index: 99;
-            &:nth-child(1) {
-                transform: scale(1.25) translateX(32px);
-            }
-            &:nth-child(8) {
-                transform: scale(1.25) translateX(-32px);
-            }
-            .text-container {
-                opacity: 1;
-                display: block;
-            }
-        }
-        .image-container {
-            img {
-                width: 100%;
-                height: 100%;
-            }
-        }
-        .text-container {
-            opacity: 0;
-            position: absolute;
-            z-index: 100;
-        }
-    }
+    width: 96%;
+    margin: 0 auto;
 }

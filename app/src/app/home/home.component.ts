@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WebService } from '../web.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  books:any;
+  apiData:any;
+
+  constructor(private webService : WebService) {}
+
+  getBooks() {
+    this.webService.getBooks()
+    .subscribe(res => {
+      this.books = res;
+    })
+  }
+
+  getApiData() {
+    this.webService.getApiData()
+    .subscribe(res => {
+      console.log(res);
+      this.apiData = res;
+    })
+  }
 
   ngOnInit(): void {
+    this.getBooks()
+    this.getApiData();
   }
 
 }
