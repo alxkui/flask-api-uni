@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/services/books.service';
-import { Book } from './book/book';
+import { Book } from './book/Book';
 
 @Component({
   selector: 'app-home',
@@ -10,11 +10,34 @@ import { Book } from './book/book';
 export class HomeComponent implements OnInit {
 
   books: Book[] = [];
+  apiInfo: any;
+  pageNo: number = 1;
+  pageSize: number = 24;
 
   constructor(private booksService: BooksService) {}
 
   ngOnInit(): void {
-    this.booksService.getBooks().subscribe((books) => (this.books = books));
+    this.booksService.getBooks(this.pageSize, this.pageNo).subscribe((books) => (this.books = books));
+    this.booksService.getApiData().subscribe((data) => (this.apiInfo = data));
+    window.addEventListener('scroll', _ => {
+      if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        this.loadMoreBooks();
+      }
+    });
+  }
+
+  loadMoreBooks(): void {
+    this.pageNo++;
+    this.booksService.getBooks(this.pageSize, this.pageNo).subscribe((books) => {
+      books.forEach(book => {
+        this.books.push(book);
+      })
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Not working
+    //window.removeEventListener('scroll', this.handleEndOfPage);
   }
 
 }
