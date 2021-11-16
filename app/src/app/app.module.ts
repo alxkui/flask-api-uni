@@ -13,6 +13,7 @@ import { AuthorsComponent } from './components/authors/authors.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookComponent } from './components/home/book/book.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SingleBookComponent } from './components/single-book/single-book.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     DiscussionComponent,
     PicksComponent,
     AuthorsComponent,
-    BookComponent
+    BookComponent,
+    SingleBookComponent
   ],
   imports: [
     BrowserModule,

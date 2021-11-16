@@ -11,5 +11,6 @@ export class BookComponent {
   faLongArrowAltRight = faLongArrowAltRight;
   @Input() image!: String;
   @Input() title!: String;
+  @Input() id!: String;
 
 }

@@ -4,6 +4,6 @@
 
 <div class="container-fluid">
     <div *ngIf="books" class="books-list">
-        <app-book *ngFor="let book of books" [image]="book.image.url" [title]="book.title"></app-book>
+        <app-book *ngFor="let book of books" [id]="book.title" [image]="book.image.url" [title]="book.title"></app-book>
     </div>
 </div>
