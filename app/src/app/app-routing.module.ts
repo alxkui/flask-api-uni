@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'discussions', component: DiscussionComponent },
   { path: 'top', component: PicksComponent },
   { path: 'authors', component: AuthorsComponent },
-  { path: 'book:id', component: SingleBookComponent},
+  { path: 'book/:id', component: SingleBookComponent},
 ];
 
 @NgModule({

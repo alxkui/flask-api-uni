@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BooksService } from 'src/app/services/books.service';
+import { Book } from '../home/book/Book';
 
 @Component({
   selector: 'app-single-book',
@@ -9,20 +11,12 @@ import { Subscription } from 'rxjs';
 })
 export class SingleBookComponent implements OnInit {
 
-  private routeSub!: Subscription;
-  constructor(private route: ActivatedRoute) { }
+  public book!:Book;
+  constructor(private route: ActivatedRoute, private booksService: BooksService) { }
 
   ngOnInit(): void {
-    console.log("Hello world");
-    
-    this.routeSub = this.route.params.subscribe(params => {
-      console.log(params);
-      console.log(params['id']);
-    })
-  }
-
-  ngOnDestroy() {
-    this.routeSub.unsubscribe();
+    this.booksService.getSingleBook(this.route.snapshot.params['id'])
+    .subscribe(book => this.book = book);
   }
 
 }

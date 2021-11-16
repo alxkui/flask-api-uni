@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
   constructor(private booksService: BooksService) {}
 
   ngOnInit(): void {
-    this.booksService.getBooks(this.pageSize, this.pageNo).subscribe((books) => (this.books = books));
+    this.booksService.getBooks(this.pageSize, this.pageNo).subscribe((books) => {this.books = books; console.log(books);
+    });
     this.booksService.getApiData().subscribe((data) => (this.apiInfo = data));
     window.addEventListener('scroll', _ => {
       if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
