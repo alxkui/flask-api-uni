@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { BooksService } from 'src/app/services/books.service';
 import { Book } from '../home/book/Book';
+import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-single-book',
@@ -11,12 +11,15 @@ import { Book } from '../home/book/Book';
 })
 export class SingleBookComponent implements OnInit {
 
-  public book!:Book;
+  book!:Book;
+  faLongArrowAltRight = faLongArrowAltRight;
+
   constructor(private route: ActivatedRoute, private booksService: BooksService) { }
 
   ngOnInit(): void {
     this.booksService.getSingleBook(this.route.snapshot.params['id'])
-    .subscribe(book => this.book = book);
+    .subscribe(book => {this.book = book; console.log(book);
+    });
   }
 
 }

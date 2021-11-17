@@ -1,4 +1,6 @@
-<nav class="navigation-styles">
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="#">Motiv8</a>
     <ul ngbNav #nav="ngbNav" class="nav">
         <li ngbNavItem>
             <a ngbNavLink [routerLink]="['/']">Home</a>
@@ -12,6 +14,13 @@
         <li ngbNavItem [routerLink]="['/authors']">
             <a ngbNavLink>Top authors</a>
         </li>
+        <li ngbNavItem [routerLink]="['/register']">
+            <a ngbNavLink>Register</a>
+        </li>
+        <li ngbNavItem [routerLink]="['/login']">
+            <a ngbNavLink>Login</a>
+        </li>
     </ul>
+    </div>
 </nav>
 <div [ngbNavOutlet]="nav"></div>

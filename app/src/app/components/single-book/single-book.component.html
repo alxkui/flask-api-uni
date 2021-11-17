@@ -1,3 +1,75 @@
-<div class="container-fluid">
-    <h3>{{book.title}}</h3>
+<div *ngIf="book" class="jumbotron"><h1>{{book.title}}</h1></div>
+<div *ngIf="book" class="container-fluid">
+    <div class="row mt-4">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h3 class="card-title">Discussion</h3>
+                        <app-discussion-form></app-discussion-form>
+                    </div>
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Alex, 14th May 2020</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur et ex accusantium a, dicta ratione.</p>
+                        </div>
+                    </div>
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Alex, 14th May 2020</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur et ex accusantium a, dicta ratione.</p>
+                        </div>
+                    </div>
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Alex, 14th May 2020</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur et ex accusantium a, dicta ratione.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title mb-4 mt-4">About author</h3>
+                    <div class="card-text">
+                        <a href="{{book.author.author_url}}"><h4>{{book.author.name}}</h4></a>
+                        <span>{{book.author.followers}}</span>
+                        <p class="mt-4" [innerHTML]="book.author.bio"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img class="card-image-top  align-center" src="{{book.image.url}}" alt="{{book.image.alt}}" />
+                    <h3 class="card-title mb-4 mt-4">About book</h3>
+                    <div class="card-text" [innerHTML]="book.description"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title mb-4 mt-4">Buy this book</h3>
+                    <div *ngFor="let store of book.stores" class="store">
+                        <fa-icon class="mr-2" [icon]="faLongArrowAltRight"></fa-icon>
+                        <a style="font-size: 1.2rem" href="{{store.store_book_url}}">{{store.store_name}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h3 class="card-title mb-4 mt-4">Other books by this author</h3>
+                    <div class="card-text">
+                        <div style="display: inline" *ngFor="let rel of book.author.books_from_author" class="related-book">
+                            <a href="{{rel.url}}"><img src="{{rel.image}}" alt="{{rel.title}}" title="{{rel.title}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

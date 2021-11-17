@@ -29,16 +29,17 @@ def jwt_required(func):
     return jwt_required_wrapper
 
 # GET login
-@app.route(PREFIX + "/login", methods=['GET'])
+@app.route(PREFIX + "/auth/login", methods=['POST'])
 def login():
-    auth = request.authorization
+    auth = request.json
 
     if auth:
-        user = users_collection.find_one({"email": auth.username})
+        user = users_collection.find_one({"email": auth['email']})
         if user is not None:
-            if bcrypt.checkpw(bytes(auth.password, 'UTF-8'), user['password']):
+            if bcrypt.checkpw(bytes(auth['password'], 'UTF-8'), user['password']):
                 token = jwt.encode({
-                    "user": auth.username,
+                    "user": auth['email'],
+                    "id": str(user['_id']),
                     "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
                 }, app.config['SECRET_KEY'])
 
@@ -54,38 +55,35 @@ def login():
 
 
 # POST register
-@app.route(PREFIX + "/register", methods=['POST'])
+@app.route(PREFIX + "/auth/register", methods=['POST'])
 def register():
 
-    if request.form['email']:
-        email = request.form['email']
+    if request.json['email']:
+        email = request.json['email']
 
     if users_collection.count_documents({"email": email}) > 0:
         return make_response(jsonify({
             "message": "User already exists!"
         }), 401)
 
-    if request.form['password']:
-        password = request.form['password']
+    # NEEDS UPADTING TO JSON
+    if request.json['password']:
+        password = request.json['password']
 
-    if request.form['name']:
-        name = request.form['name']
+    if request.json['name']:
+        name = request.json['name']
     
     users_collection.insert_one({
         "email": email,
         "password": bcrypt.hashpw(bytes(password, 'UTF-8'), bcrypt.gensalt()),
         "name": name,
-        "favourite_books": [],
-        "favourite_authors": [],
-        "bio": "",
-        "reviews": [],
     })
     return make_response(jsonify({
         "message": "User created successfully",
     }), 200)
 
 # GET logout
-@app.route(PREFIX + '/logout', methods=['GET'])
+@app.route(PREFIX + '/auth/logout', methods=['GET'])
 @jwt_required
 def logout():
     token = request.headers['x-access-token']

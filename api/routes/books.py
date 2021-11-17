@@ -23,7 +23,6 @@ def all_books():
 
 # GET single book
 @app.route(PREFIX + '/books/<string:id>', methods=['GET'])
-@jwt_required
 def single_book(id):
 	book = books_collection.find_one({'_id': ObjectId(id)})
 	if book is not None:
@@ -31,3 +30,4 @@ def single_book(id):
 		return make_response( jsonify(book), 200 )
 	else:
 		return make_response( jsonify({"error": "Invalid book ID"}), 404 )
+	

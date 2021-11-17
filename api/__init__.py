@@ -22,4 +22,5 @@ def root():
 
 import api.routes.auth
 import api.routes.books
+import api.routes.discussions
 

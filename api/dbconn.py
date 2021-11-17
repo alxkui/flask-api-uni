@@ -4,3 +4,4 @@ db = client.bookDB
 books_collection = db.books
 users_collection = db.users
 blacklist_collection = db.blacklist
+discussions_collection = db.discussions

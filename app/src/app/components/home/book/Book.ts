@@ -16,7 +16,7 @@ export interface Author {
     followers: String,
     bio: String,
     author_url: String,
-    books_form_author: BooksFromAuthor[],
+    books_from_author: BooksFromAuthor[],
     meta: BookImage,
 }
 

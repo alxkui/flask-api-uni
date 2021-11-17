@@ -6,6 +6,8 @@ import { HomeComponent } from './components/home/home.component';
 import { PicksComponent } from './components/picks/picks.component';
 import { AuthorsComponent } from './components/authors/authors.component';
 import { DiscussionComponent } from './components/discussion/discussion.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'top', component: PicksComponent },
   { path: 'authors', component: AuthorsComponent },
   { path: 'book/:id', component: SingleBookComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

@@ -4,6 +4,7 @@ import { BooksService } from './services/books.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HomeComponent } from './components/home/home.component';
@@ -14,6 +15,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookComponent } from './components/home/book/book.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SingleBookComponent } from './components/single-book/single-book.component';
+import { DiscussionFormComponent } from './components/discussion-form/discussion-form.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,10 @@ import { SingleBookComponent } from './components/single-book/single-book.compon
     PicksComponent,
     AuthorsComponent,
     BookComponent,
-    SingleBookComponent
+    SingleBookComponent,
+    DiscussionFormComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +39,7 @@ import { SingleBookComponent } from './components/single-book/single-book.compon
     NgbModule,
     FontAwesomeModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [BooksService],
   bootstrap: [AppComponent]
