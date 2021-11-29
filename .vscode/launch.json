@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "command": "cd app && npm run start",
+            "command": "cd app && npm start",
             "name": "Frontend",
             "request": "launch",
             "type": "node-terminal"

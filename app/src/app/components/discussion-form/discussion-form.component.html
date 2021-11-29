@@ -1,7 +1,7 @@
-<form>
+<form (ngSubmit)="postDiscussion()">
     <div class="mb-3">
-        <label for="text" class="form-label">What's on your mind</label>
-        <textarea class="form-control" id="text" name="text" rows="3"></textarea>
+        <label for="text" class="form-label">What's on your mind {{user.name ? user.name : ""}}?</label>
+        <textarea class="form-control" id="text" [(ngModel)]="text" name="text" rows="3"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Add to discussion</button>
+    <button type="submit" [disabled]="user ? false : true" class="btn btn-primary">{{user ? "Add to discussion" : "Please login to post"}}</button>
 </form>

@@ -14,11 +14,14 @@
         <li ngbNavItem [routerLink]="['/authors']">
             <a ngbNavLink>Top authors</a>
         </li>
-        <li ngbNavItem [routerLink]="['/register']">
+        <li *ngIf="!token" ngbNavItem [routerLink]="['/register']">
             <a ngbNavLink>Register</a>
         </li>
-        <li ngbNavItem [routerLink]="['/login']">
+        <li *ngIf="!token" ngbNavItem [routerLink]="['/login']">
             <a ngbNavLink>Login</a>
+        </li>
+        <li *ngIf="token" (click)="logout()" ngbNavItem>
+            <a ngbNavLink>Logout</a>
         </li>
     </ul>
     </div>

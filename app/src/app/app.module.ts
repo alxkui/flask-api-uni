@@ -18,6 +18,7 @@ import { SingleBookComponent } from './components/single-book/single-book.compon
 import { DiscussionFormComponent } from './components/discussion-form/discussion-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { SingleDiscussionComponent } from './components/single-discussion/single-discussion.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RegisterComponent } from './components/register/register.component';
     SingleBookComponent,
     DiscussionFormComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SingleDiscussionComponent
   ],
   imports: [
     BrowserModule,

@@ -8,23 +8,8 @@
                         <h3 class="card-title">Discussion</h3>
                         <app-discussion-form></app-discussion-form>
                     </div>
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Alex, 14th May 2020</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur et ex accusantium a, dicta ratione.</p>
-                        </div>
-                    </div>
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Alex, 14th May 2020</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur et ex accusantium a, dicta ratione.</p>
-                        </div>
-                    </div>
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Alex, 14th May 2020</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur et ex accusantium a, dicta ratione.</p>
-                        </div>
+                    <div *ngFor="let discussion of discussions | async" class="card mt-4">
+                        <app-single-discussion [discussion]="discussion" [user]="user"></app-single-discussion>
                     </div>
                 </div>
             </div>
@@ -32,7 +17,7 @@
         <div class="col-sm-2">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title mb-4 mt-4">About author</h3>
+                    <h3 class="card-title mb-4 mt-4">About the author</h3>
                     <div class="card-text">
                         <a href="{{book.author.author_url}}"><h4>{{book.author.name}}</h4></a>
                         <span>{{book.author.followers}}</span>
@@ -45,7 +30,7 @@
             <div class="card">
                 <div class="card-body">
                     <img class="card-image-top  align-center" src="{{book.image.url}}" alt="{{book.image.alt}}" />
-                    <h3 class="card-title mb-4 mt-4">About book</h3>
+                    <h3 class="card-title mb-4 mt-4">About this book</h3>
                     <div class="card-text" [innerHTML]="book.description"></div>
                 </div>
             </div>

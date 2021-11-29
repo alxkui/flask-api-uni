@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
     }
 
     this.userService.loginUser(loginDetails).subscribe(data => {
-      localStorage.setItem('session_token', data.token);
-      console.log(data);
+      sessionStorage.setItem('token', data.token);
+      window.location.href = "/";
     });
     alert("User logged in");
 
