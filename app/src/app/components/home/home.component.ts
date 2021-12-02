@@ -9,7 +9,7 @@ import { Book } from './book/Book';
 })
 export class HomeComponent implements OnInit {
 
-  books: Book[] = [];
+  books: any = [];
   apiInfo: any;
   pageNo: number = 1;
   pageSize: number = 24;
@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit {
   constructor(private booksService: BooksService) {}
 
   ngOnInit(): void {
-    this.booksService.getBooks(this.pageSize, this.pageNo).subscribe((books) => {this.books = books; console.log(books);
-    });
+    this.books = this.booksService.getBooks(this.pageSize, this.pageNo);
+
     this.booksService.getApiData().subscribe((data) => (this.apiInfo = data));
     window.addEventListener('scroll', _ => {
       if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
