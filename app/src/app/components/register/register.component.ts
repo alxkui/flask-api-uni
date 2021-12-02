@@ -11,6 +11,8 @@ export class RegisterComponent implements OnInit {
   name: string = "";
   email: string = "";
   password: string = "";
+  errorMessage: string = "";
+  successMessage: string = "";
 
   constructor(private userService: UserService) { }
 
@@ -25,7 +27,13 @@ export class RegisterComponent implements OnInit {
       password: this.password,
     }
 
-    this.userService.registerUser(newUser).subscribe(() => alert("User registered successfully"));
+    this.userService.registerUser(newUser).subscribe(
+      (response) => {
+        this.successMessage = response.message;
+        window.location.href = '/login';
+      },
+      (error) => this.errorMessage = error.error.message,
+    );
 
     this.name = '';
     this.email = '';

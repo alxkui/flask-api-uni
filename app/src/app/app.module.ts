@@ -19,6 +19,7 @@ import { DiscussionFormComponent } from './components/discussion-form/discussion
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SingleDiscussionComponent } from './components/single-discussion/single-discussion.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SingleDiscussionComponent } from './components/single-discussion/single
     DiscussionFormComponent,
     LoginComponent,
     RegisterComponent,
-    SingleDiscussionComponent
+    SingleDiscussionComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
