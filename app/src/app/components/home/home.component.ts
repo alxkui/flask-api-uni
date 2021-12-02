@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/services/books.service';
+import { UserService } from 'src/app/services/user.service';
 import { Book } from './book/Book';
 
 @Component({
@@ -13,12 +14,14 @@ export class HomeComponent implements OnInit {
   apiInfo: any;
   pageNo: number = 1;
   pageSize: number = 24;
+  user:any;
 
-  constructor(private booksService: BooksService) {}
+  constructor(private booksService: BooksService, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.books = this.booksService.getBooks(this.pageSize, this.pageNo);
-
+    this.user = this.userService.getUserInfo();
+    this.booksService.getBooks(this.pageSize, this.pageNo).subscribe((books) => {this.books = books; console.log(books);
+    });
     this.booksService.getApiData().subscribe((data) => (this.apiInfo = data));
     window.addEventListener('scroll', _ => {
       if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {

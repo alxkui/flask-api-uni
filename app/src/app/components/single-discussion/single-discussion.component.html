@@ -1,0 +1,16 @@
+<div class="card-body">
+    <div class="d-flex justify-content-between">
+        <span class="card-title">{{discussion.user_name}}</span>
+        <div *ngIf="user && user.id === discussion.user" class="tool-icons">
+            <button (click)="removeDiscussion(discussion._id)" class="btn btn-danger" title="Remove"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <button (click)="handleEditDiscussion()" class="btn btn-secondary" title="Edit"><fa-icon [icon]="faEdit"></fa-icon></button>
+        </div>
+    </div>
+    <p *ngIf="!editing">{{discussion.text}}</p>
+    <div *ngIf="editing" class="editing">
+        <textarea cols="4" class="form-control" name="text" id="text" [(ngModel)]="text"></textarea>
+        <button (click)="editDiscussion(discussion._id)" class="mt-2 btn btn-primary">Edit</button>
+    </div>
+    <hr />
+    <span style="font-size: .8em;">Posted at: {{discussion.timestamp}}</span>
+</div>

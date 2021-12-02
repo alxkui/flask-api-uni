@@ -10,8 +10,8 @@ def jwt_required(func):
     @wraps(func)
     def jwt_required_wrapper(*args, **kwargs):
         token = None
-        if 'x-access-token' in request.headers:
-            token = request.headers['x-access-token']
+        if 'Authorization' in request.headers:
+            token = request.headers['Authorization']
 
             b1_token = blacklist_collection.find_one({"token": token})
             if b1_token is not None:
@@ -40,6 +40,7 @@ def login():
                 token = jwt.encode({
                     "user": auth['email'],
                     "id": str(user['_id']),
+                    "name": str(user['name']),
                     "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
                 }, app.config['SECRET_KEY'])
 
@@ -86,7 +87,7 @@ def register():
 @app.route(PREFIX + '/auth/logout', methods=['GET'])
 @jwt_required
 def logout():
-    token = request.headers['x-access-token']
+    token = request.headers['Authorization']
     blacklist_collection.insert_one({"token": token})
     return make_response({"message": "Logout successful"}, 200)
         

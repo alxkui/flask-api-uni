@@ -27,20 +27,27 @@ def all_discussions(id):
 @app.route(PREFIX + '/books/<string:id>/discussions', methods=['POST'])
 @jwt_required
 def add_discussion(id):
-    token = request.headers['x-access-token']
+    token = request.headers['Authorization']
+    if not token:
+        return make_response(jsonify({
+            "message":"You are not authorised!",
+        }), 401)
     token_decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms="HS256")
 
-    book = books_collection.find_one({'_id': ObjectId(id)})
-    user = users_collection.find_one({'_id': ObjectId(token_decoded['id'])})
-
     discussion_text = request.json['d_text']
+    book_id = request.json['bid']
+
+    book = books_collection.find_one({'_id': ObjectId(book_id)})
+    user = users_collection.find_one({'_id': ObjectId(token_decoded['id'])})
 
     data = {
         "text": discussion_text,
         "book": ObjectId(book['_id']),
         "user": ObjectId(user['_id']),
+        "user_name": user['name'],
         "timestamp": datetime.datetime.utcnow(),
     }
+
     discussions_collection.insert_one(data)
     return make_response(jsonify({"message":"Thanks for joining the discussion!"}), 200)
 
@@ -48,7 +55,7 @@ def add_discussion(id):
 @app.route(PREFIX + '/books/<string:id>/discussions/<string:d_id>', methods=['PUT'])
 @jwt_required
 def update_discussion(id, d_id):
-    token = request.headers['x-access-token']
+    token = request.headers['Authorization']
     token_decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms="HS256")
 
     book = books_collection.find_one({'_id': ObjectId(id)})
@@ -73,7 +80,7 @@ def update_discussion(id, d_id):
 @app.route(PREFIX + '/books/<string:id>/discussions/<string:d_id>', methods=['DELETE'])
 @jwt_required
 def remove_discussion(id, d_id):
-    token = request.headers['x-access-token']
+    token = request.headers['Authorization']
     token_decoded = jwt.decode(token, app.config['SECRET_KEY'], algorithms="HS256")
 
     book = books_collection.find_one({'_id': ObjectId(id)})
