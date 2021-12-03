@@ -44,11 +44,11 @@ def login():
                     "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
                 }, app.config['SECRET_KEY'])
 
-                return make_response(jsonify({'token': token}), 200)
+                return make_response(jsonify({'token': token, 'message': "Successfully logged in!"}), 200)
             else:
-                return make_response(jsonify({"message": "Bad password"}), 401)
+                return make_response(jsonify({"message": "Password is incorrect"}), 401)
         else:
-            return make_response(jsonify({"message": "Email does not exist"}), 401)
+            return make_response(jsonify({"message": "Email or password does'nt match"}), 401)
     
     return make_response(jsonify({"message": "Authentication required"}), 401)
 

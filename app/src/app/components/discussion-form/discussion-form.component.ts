@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { DiscussionsService } from 'src/app/services/discussions.service';
 import { ActivatedRoute } from '@angular/router';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-discussion-form',
@@ -13,13 +14,16 @@ export class DiscussionFormComponent implements OnInit {
   text:string = '';
   bid:string = this.route.snapshot.params['id'];
   discussions:any;
-  constructor(private userService: UserService, private dService: DiscussionsService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private dService: DiscussionsService, private route: ActivatedRoute, private messagesService: MessagesService) { }
   ngOnInit(): void {
     this.user = this.userService.getUserInfo();
   }
 
   postDiscussion() {
-    if(!this.text) { alert("Please enter what is on your mind"); return }
+    if(!this.text) {
+      this.messagesService.postErrorMessage("Please don't leave the text box blank :(");
+      return
+    }
 
     //const uid = this.user.id;
     const data = {

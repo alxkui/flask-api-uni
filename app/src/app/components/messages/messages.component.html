@@ -1,8 +1,8 @@
-<div class="messages">
-    <div class="message alert alert-success">
-        This is a success message <fa-icon [icon]="faTimes" title="dismiss"></fa-icon>
+<div *ngIf="messages" class="messages">
+    <div *ngFor="let success of messages.success" class="message alert alert-success">
+        {{success}} <fa-icon (click)="handleDismiss('success', success)" [icon]="faTimes" title="dismiss"></fa-icon>
     </div>
-    <div class="message alert alert-danger">
-        This is a error message <fa-icon [icon]="faTimes" title="dismiss"></fa-icon>
+    <div *ngFor="let error of messages.error" class="message alert alert-danger">
+        {{error}} <fa-icon (click)="handleDismiss('error', error)" [icon]="faTimes" title="dismiss"></fa-icon>
     </div>
 </div>

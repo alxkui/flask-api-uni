@@ -26,12 +26,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response) => {
           sessionStorage.setItem('token', response.token);
-          this.messagesService.postSuccess(response.message);
+          this.messagesService.postSuccessMessage(response.message);
           window.location.href = "/";
         },
         (error) => {
           console.log(error);
-          this.messagesService.postError(error.message);
+          this.messagesService.postErrorMessage(error.error.message);
         }
     );
 

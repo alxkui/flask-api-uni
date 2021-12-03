@@ -1,5 +1,6 @@
 .messages {
     position: absolute;
+    z-index: 999;
     top: 2%;
     left: 50%;
     transform: translateX(-50%);

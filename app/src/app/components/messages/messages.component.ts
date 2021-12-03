@@ -13,6 +13,13 @@ export class MessagesComponent implements OnInit {
   constructor(private messagesService: MessagesService) { }
 
   ngOnInit(): void {
+    this.messagesService.getMessages().subscribe(messages => {
+      this.messages = messages
+    });
+  }
+
+  handleDismiss(type:string, id:string) {
+    this.messagesService.clearMessage(type, id);
   }
 
 }
