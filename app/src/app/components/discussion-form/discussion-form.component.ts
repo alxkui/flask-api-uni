@@ -30,11 +30,17 @@ export class DiscussionFormComponent implements OnInit {
       bid: this.bid,
       d_text: this.text,
     }
-    this.dService.postDiscussion(this.bid, JSON.stringify(data))?.subscribe(res => {
-      alert("Thanks for joining the discussion!");
-      this.text = "";
-      window.location.reload();
-    });
+    this.dService.postDiscussion(this.bid, JSON.stringify(data))?.subscribe(
+      (res) => {
+        this.messagesService.postSuccessMessage(res.message);
+        this.text = "";
+        window.location.reload();
+      },
+      (error) => {
+        this.messagesService.postErrorMessage(error.error.message);
+        window.location.href = "/login";
+      }
+    );
   }
 
 }

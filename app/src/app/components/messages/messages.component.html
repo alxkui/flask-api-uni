@@ -5,4 +5,7 @@
     <div *ngFor="let error of messages.error" class="message alert alert-danger">
         {{error}} <fa-icon (click)="handleDismiss('error', error)" [icon]="faTimes" title="dismiss"></fa-icon>
     </div>
+    <div *ngFor="let info of messages.info" class="message alert alert-info">
+        {{info}} <fa-icon (click)="handleDismiss('info', info)" [icon]="faTimes" title="dismiss"></fa-icon>
+    </div>
 </div>

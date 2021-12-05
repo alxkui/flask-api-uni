@@ -6,16 +6,59 @@ from bson import ObjectId
 from api.routes.auth import jwt_required
 import datetime
 
+# All discussions without filter
+@app.route(PREFIX + '/books/discussions', methods=['GET'])
+def all_discussions_wo_filter():
+    # find all discussions and aggregate with the book id
+    discussions = discussions_collection.aggregate([{
+         "$lookup": {
+            "from": "books",
+            "localField": "book",
+            "foreignField": "_id",
+            "as": "book"
+        }},
+        { "$unwind": "$book" },
+        { "$project": {
+            "book.author": 0,
+            "book.description": 0,
+            "book.image": 0,
+            "book.meta": 0,
+            "book.stores": 0,
+            "book.book_data": 0,
+            "book.book_url": 0,
+        }}
+    ])
+    all_discussions = []
+    for discussion in discussions:
+        discussion["_id"] = str(discussion["_id"])
+        discussion["user"] = str(discussion["user"])
+        discussion["book"]["_id"] = str(discussion["book"]["_id"])
+        all_discussions.append({
+            "discussion": discussion
+        })
+    
+    return make_response(jsonify({
+        "message": "Discussions found",
+        "data": all_discussions
+    }), 200)
+
 # GET discussions on book
-
-
 @app.route(PREFIX + '/books/<string:id>/discussions', methods=['GET'])
 # @jwt_required
 def all_discussions(id):
+    # Try to find book with specific id
     book = books_collection.find_one({'_id': ObjectId(id)})
+
+    if not book:
+        return make_response(jsonify({
+            "message": "The book with the specified ID cannot be found"
+        }), 404)
+
+    # If there is a book, convert the id to a normal string
     if book is not None:
         book['_id'] = str(book['_id'])
 
+    # find all discussion that contains that book id
     all_discussions = []
     for discussion in discussions_collection.find({"book": ObjectId(book['_id'])}):
         discussion['_id'] = str(discussion['_id'])

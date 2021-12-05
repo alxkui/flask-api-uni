@@ -1,3 +1,48 @@
 <div class="jumbotron">
     <h1>Top picks</h1>
 </div>
+
+<div *ngIf="loading">
+    {{renderLoading()}}
+</div>
+
+<div class="container-fluid">
+    <div *ngIf="books" class="picks">
+        <div class="sort">
+
+            <h4>Sort by:</h4>
+            <div class="d-flex justify-content-between align-items-center">
+                <span (click)="sortRatingCount()" [ngClass]="{'btn btn-primary flex-grow-1': true, 'active': sort.ratingCount}">
+                    Rating count
+                    <fa-icon *ngIf="sort.ratingCount" [icon]="faArrowDown"></fa-icon>
+                    <fa-icon *ngIf="!sort.ratingCount" [icon]="faArrowUp"></fa-icon>
+                </span>
+
+                <span (click)="sortAverageRating()" [ngClass]="{'btn btn-primary flex-grow-1': true, 'active': sort.averageRating}">
+                    Average rating
+                    <fa-icon *ngIf="sort.averageRating" [icon]="faArrowDown"></fa-icon>
+                    <fa-icon *ngIf="!sort.averageRating" [icon]="faArrowUp"></fa-icon>
+                </span>
+            </div>
+
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <th scope="col">Book title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Book rating count</th>
+                <th scope="col">Book average rating</th>
+                <th scope="col">Book pages</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <td>{{book.title}}</td>
+                    <td>{{book.author.name}}</td>
+                    <td>{{renderRatingInt(book.meta.rating_count)}}</td>
+                    <td>{{renderRatingFloat(book.meta.rating_value)}}</td>
+                    <td>{{book.pages}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

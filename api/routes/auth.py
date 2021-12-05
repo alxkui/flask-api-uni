@@ -18,12 +18,16 @@ def jwt_required(func):
                 return make_response(jsonify({"message": "Token is blacklisted"}), 401)
             
         if not token:
-            return jsonify({'message': 'Token is missing'}, 401)
+            return make_response(jsonify({
+                'message': 'Token is missing'
+            }), 401)
 
         try:
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms="HS256")
         except:
-            return jsonify({'message': 'Token is invalid'}, 401)
+            return make_response(jsonify({
+                'message': 'Session has expired, please login again...'
+            }), 401)
 
         return func(*args, **kwargs)
     return jwt_required_wrapper
@@ -41,14 +45,14 @@ def login():
                     "user": auth['email'],
                     "id": str(user['_id']),
                     "name": str(user['name']),
-                    "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
+                    "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=60)
                 }, app.config['SECRET_KEY'])
 
                 return make_response(jsonify({'token': token, 'message': "Successfully logged in!"}), 200)
             else:
                 return make_response(jsonify({"message": "Password is incorrect"}), 401)
         else:
-            return make_response(jsonify({"message": "Email or password does'nt match"}), 401)
+            return make_response(jsonify({"message": "Email or password doesn't match"}), 401)
     
     return make_response(jsonify({"message": "Authentication required"}), 401)
 

@@ -26,4 +26,8 @@ export class DiscussionsService {
   getDiscussionsOnBook(bid:string) {
     return this.http.get<any>(this.apiUrl + `/books/${bid}/discussions`, this.userService.getHeaders());
   }
+
+  getAllDiscussion() {
+    return this.http.get<any>(this.apiUrl + `/books/discussions`, this.userService.getHeaders());
+  }
 }
