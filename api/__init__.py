@@ -10,6 +10,9 @@ app.config['SECRET_KEY'] = 'mysp3c1als3cr3tthatn00n3w1ll3v3rkn0w'
 VERSION = 'v1'
 PREFIX = '/api/' + VERSION
 
+# initialise index for searching
+books_collection.create_index([('title', 'text')])
+
 # GET root
 @app.route(PREFIX + '/', methods=['GET'])
 def root():

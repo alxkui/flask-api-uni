@@ -15,6 +15,10 @@ export class BooksService {
     return this.http.get<Book[]>(this.apiUrl + `/books?ps=${pageSize}&pn=${pageNo}`);
   }
 
+  searchBooks(searchTerm:string): Observable<Book[]> {
+    return this.http.get<Book[]>(this.apiUrl + `/books?s=${searchTerm}`);
+  }
+
   getSingleBook(id:String): Observable<Book> {
     return this.http.get<Book>(this.apiUrl + `/books/${id}`);
   }

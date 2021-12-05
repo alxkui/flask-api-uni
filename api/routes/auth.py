@@ -89,9 +89,10 @@ def register():
 
 # GET logout
 @app.route(PREFIX + '/auth/logout', methods=['GET'])
-@jwt_required
 def logout():
     token = request.headers['Authorization']
+    if not token:
+        return
     blacklist_collection.insert_one({"token": token})
     return make_response({"message": "Logout successful"}, 200)
         

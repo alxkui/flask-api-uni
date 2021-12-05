@@ -10,7 +10,7 @@ import { Book } from './book/Book';
 })
 export class HomeComponent implements OnInit {
 
-  books: any = [];
+  books:any = [];
   apiInfo: any;
   pageNo: number = 1;
   pageSize: number = 24;
@@ -21,7 +21,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.getUserInfo();
 
-    this.books = this.booksService.getBooks(this.pageSize, this.pageNo);
+    this.books = this.booksService.getBooks(this.pageSize, this.pageNo).subscribe(res => {
+      this.books = res;
+    });
 
     this.booksService.getApiData().subscribe((data) => (this.apiInfo = data));
     

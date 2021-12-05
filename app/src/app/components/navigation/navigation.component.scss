@@ -3,3 +3,31 @@ a {
     text-transform: uppercase;
     font-weight: normal;
 }
+
+.search {
+    position: relative;
+    .search-box {
+        position: fixed;
+        left: 0;
+        top: 4%;
+        width: 100%;
+        background: rgb(250, 250, 250);
+        border-bottom: 1px solid rgb(235, 235, 235);
+        height: auto;
+        z-index: 999;
+        padding: 2em;
+        h3 {
+            margin-bottom: 1em;
+        }
+        a {
+            color: black !important;
+            margin-bottom: 2em;
+            display: block;
+            width: 100%;
+        }
+        .container-search {
+            width: 80%;
+            margin: 0 auto;
+        }
+    }
+}

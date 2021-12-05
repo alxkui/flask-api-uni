@@ -10,7 +10,6 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { HomeComponent } from './components/home/home.component';
 import { DiscussionComponent } from './components/discussion/discussion.component';
 import { PicksComponent } from './components/picks/picks.component';
-import { AuthorsComponent } from './components/authors/authors.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookComponent } from './components/home/book/book.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +19,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SingleDiscussionComponent } from './components/single-discussion/single-discussion.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +28,14 @@ import { MessagesComponent } from './components/messages/messages.component';
     HomeComponent,
     DiscussionComponent,
     PicksComponent,
-    AuthorsComponent,
     BookComponent,
     SingleBookComponent,
     DiscussionFormComponent,
     LoginComponent,
     RegisterComponent,
     SingleDiscussionComponent,
-    MessagesComponent
+    MessagesComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

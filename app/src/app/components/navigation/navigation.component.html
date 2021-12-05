@@ -11,9 +11,6 @@
         <li ngbNavItem [routerLink]="['/top']">
             <a ngbNavLink>Top picks</a>
         </li>
-        <li ngbNavItem [routerLink]="['/authors']">
-            <a ngbNavLink>Top authors</a>
-        </li>
         <li *ngIf="!token" ngbNavItem [routerLink]="['/register']">
             <a ngbNavLink>Register</a>
         </li>
@@ -22,6 +19,19 @@
         </li>
         <li *ngIf="token" (click)="logout()" ngbNavItem>
             <a ngbNavLink>Logout</a>
+        </li>
+        <li ngbNavItem>
+            <div class="search">
+                <input [(ngModel)]="searchTerm" (ngModelChange)="searchBook()" class="form-control" placeholder="Type to search...">
+                <div *ngIf="searchActive" class="search-box">
+                    <div class="container-search">
+                        <h3>Search results</h3>
+                        <div class="results">
+                            <a href="/book/{{book._id}}" *ngFor="let book of searchBookMatch">{{book.title}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </li>
     </ul>
     </div>

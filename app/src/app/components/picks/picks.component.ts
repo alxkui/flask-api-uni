@@ -32,14 +32,6 @@ export class PicksComponent implements OnInit {
     );
   }
 
-  renderLoading() {
-    this.messagesService.postInfoMessage("Loading...");
-  }
-
-  clearLoadingMessage() {
-    this.messagesService.clearMessage("info", "Loading...");
-  }
-
   renderRatingInt(rating:string) {
     return parseInt(rating).toLocaleString();
   }
