@@ -147,6 +147,15 @@ def update_discussion(id, d_id):
 
     discussion_text = request.json['d_text']
 
+    if not user:
+        return make_response(jsonify({"message": "That user does not exist"}), 404)
+
+    if not book:
+        return make_response(jsonify({"message": "That book does not exist"}), 404)
+
+    if not discussion_text:
+        return make_response(jsonify({"message": "No text was provided"}), 400)
+
     data = {
         "text": discussion_text,
         "timestamp": datetime.datetime.utcnow(),
@@ -172,6 +181,15 @@ def remove_discussion(id, d_id):
     book = books_collection.find_one({'_id': ObjectId(id)})
     user = users_collection.find_one({'_id': ObjectId(token_decoded['id'])})
     discussion = discussions_collection.find_one({'_id': ObjectId(d_id)})
+
+    if not user:
+        return make_response(jsonify({"message": "That user does not exist"}), 404)
+
+    if not book:
+        return make_response(jsonify({"message": "That book does not exist"}), 404)
+
+    if not discussion:
+        return make_response(jsonify({"message": "That discussion does not exist"}), 404)
 
     discussions_collection.delete_one({
         "_id": ObjectId(discussion['_id']),

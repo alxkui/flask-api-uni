@@ -14,5 +14,6 @@ export class BookComponent {
   @Input() image!: String;
   @Input() title!: String;
   @Input() id!: String;
+  @Input() discussionCount!: number;
 
 }

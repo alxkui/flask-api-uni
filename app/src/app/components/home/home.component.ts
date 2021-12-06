@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/services/books.service';
+import { DiscussionsService } from 'src/app/services/discussions.service';
+import { MessagesService } from 'src/app/services/messages.service';
 import { UserService } from 'src/app/services/user.service';
-import { Book } from './book/Book';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,9 @@ export class HomeComponent implements OnInit {
   pageNo: number = 1;
   pageSize: number = 24;
   user:any;
+  discussionCount:number = 0;
 
-  constructor(private booksService: BooksService, private userService: UserService) {}
+  constructor(private booksService: BooksService, private userService: UserService, private dService: DiscussionsService, private messagesService: MessagesService) {}
 
   ngOnInit(): void {
     this.user = this.userService.getUserInfo();
@@ -32,6 +34,14 @@ export class HomeComponent implements OnInit {
         this.loadMoreBooks();
       }
     });
+  }
+
+  countDiscussion(id:string) {
+    this.dService.getDiscussionsOnBook(id).subscribe(
+      (res) => {
+        this.discussionCount = res.length;
+      }
+    )
   }
 
   loadMoreBooks(): void {
